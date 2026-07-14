@@ -42,7 +42,7 @@ const Hero = () => {
                 <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 sm:border-4 border-white/10 shadow-2xl">
                   <Image
                     src={`${process.env.NODE_ENV === 'production' ? '/portfolio-khjo' : ''}/profile.jpg`}
-                    alt="조기현 프로필"
+                    alt="김기현 프로필"
                     fill
                     className="object-cover"
                     priority
@@ -57,7 +57,7 @@ const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="gradient-text">조기현</span>
+              <span className="gradient-text">김기현</span>
             </motion.h1>
 
             <motion.h2
@@ -75,7 +75,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              서비스를 생각하는 개발자 조기현 입니다.
+              서비스를 생각하는 개발자 김기현 입니다.
             </motion.p>
 
             <motion.div

@@ -1,6 +1,6 @@
 # Portfolio KHJO
 
-조기현의 포트폴리오 웹사이트
+김기현의 포트폴리오 웹사이트
 
 ## Features
 

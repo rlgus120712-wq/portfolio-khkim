@@ -34,7 +34,7 @@ const Contact = () => {
           className="text-center text-gray-200"
         >
           <p className="mb-2">
-            © 2025 조기현. All rights reserved.
+            © 2025 김기현. All rights reserved.
           </p>
           <p className="text-sm">
             Made with <span className="text-red-500">❤️</span> using Next.js 14,
