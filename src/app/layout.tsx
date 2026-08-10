@@ -50,6 +50,13 @@ export default function RootLayout({
       lang="ko"
       className={`scroll-smooth ${inter.variable} ${spaceGrotesk.variable}`}
     >
+      <head>
+        {/* 한글 모던 웹폰트 Pretendard (한글 텍스트 전반에 적용) */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+      </head>
       <body className="antialiased font-sans">{children}</body>
     </html>
   )

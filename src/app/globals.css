@@ -487,8 +487,8 @@ html.light .card-hover:hover {
    ============================================ */
 
 body {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-family: 'Pretendard Variable', var(--font-inter), ui-sans-serif,
+    system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 }
 
 /* 헤딩·그라디언트 타이틀은 디스플레이 폰트 + 타이트한 자간(에디토리얼 느낌) */
@@ -497,7 +497,8 @@ h2,
 h3,
 h4,
 .gradient-text {
-  font-family: var(--font-display), var(--font-inter), sans-serif;
+  font-family: var(--font-display), 'Pretendard Variable', var(--font-inter),
+    sans-serif;
   letter-spacing: -0.02em;
 }
 
@@ -527,7 +528,8 @@ h4,
    ============================================ */
 
 .hero-eyebrow {
-  font-family: var(--font-display), var(--font-inter), sans-serif;
+  font-family: var(--font-display), 'Pretendard Variable', var(--font-inter),
+    sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -535,7 +537,8 @@ h4,
 }
 
 .hero-title {
-  font-family: var(--font-display), var(--font-inter), sans-serif;
+  font-family: var(--font-display), 'Pretendard Variable', var(--font-inter),
+    sans-serif;
   font-size: clamp(3rem, 9vw, 5.5rem);
   line-height: 1.02;
   font-weight: 700;

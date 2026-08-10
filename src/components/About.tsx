@@ -61,29 +61,51 @@ const About = () => {
           </p>
         </motion.div>
 
-        {/* Bento Grid - 비대칭 레이아웃(양 끝 카드는 2칸 차지) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-fr">
+        {/* Bento Grid - 셀 크기를 다양화한 비대칭 레이아웃 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {features.map((feature, index) => {
-            const wide = index === 0 || index === features.length - 1;
+            // 벤토 배치: 0·1은 넓게(3칸), 2·3·4는 중간(2칸), 5는 풀폭(6칸)
+            const span = [
+              'lg:col-span-3',
+              'lg:col-span-3',
+              'lg:col-span-2',
+              'lg:col-span-2',
+              'lg:col-span-2',
+              'lg:col-span-6',
+            ][index] ?? 'lg:col-span-2';
+            const featured = index === 0;
+            const fullWidth = index === 5;
             return (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.08 }}
-                className={`glass rounded-2xl p-6 transition-all duration-300 group hover:-translate-y-1 ${
-                  wide ? 'lg:col-span-2' : ''
-                }`}
+                className={`glass rounded-2xl p-6 sm:p-7 transition-all duration-300 group hover:-translate-y-1 ${span} ${
+                  featured
+                    ? 'bg-gradient-to-br from-blue-500/15 via-blue-500/5 to-purple-500/10 !border-blue-400/30'
+                    : ''
+                } ${fullWidth ? 'flex flex-col sm:flex-row sm:items-center sm:gap-6' : ''}`}
               >
-                <div className="text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div
+                  className={`text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300 ${
+                    fullWidth ? 'sm:mb-0 shrink-0' : ''
+                  } ${featured ? 'scale-110 origin-left' : ''}`}
+                >
                   {feature.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-3 text-white dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-200 dark:text-gray-200 text-sm sm:text-base leading-relaxed font-medium">
-                  {feature.description}
-                </p>
+                <div>
+                  <h3
+                    className={`font-bold mb-2 sm:mb-3 text-white dark:text-white ${
+                      featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
+                    }`}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-200 dark:text-gray-200 text-sm sm:text-base leading-relaxed font-medium">
+                    {feature.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
