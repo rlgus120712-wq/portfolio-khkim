@@ -3,24 +3,27 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2, ExternalLink } from 'lucide-react';
 import { portfolioTechStack } from '../data/portfolioTech';
+import SectionHeader from './SectionHeader';
 
 export default function TechStack() {
   return (
-    <section id="tech-stack" className="py-12 sm:py-20 px-4 sm:px-6">
+    <section
+      id="tech-stack"
+      className="py-24 sm:py-28 px-4 sm:px-6 section-bg-even scroll-mt-20"
+    >
       <div className="max-w-7xl mx-auto">
+        <SectionHeader
+          eyebrow="Built With"
+          title="Portfolio Tech Stack"
+          subtitle="이 포트폴리오 웹사이트 구축에 사용된 기술들"
+        />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 gradient-text text-center">
-            Portfolio Tech Stack
-          </h2>
-          <p className="text-gray-400 text-base sm:text-lg text-center mb-8 sm:mb-12">
-            이 포트폴리오 웹사이트 구축에 사용된 기술들
-          </p>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {portfolioTechStack.map((tech, index) => (
               <motion.div
@@ -29,7 +32,7 @@ export default function TechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="glass p-6 rounded-xl hover:scale-105 transition-transform"
+                className="glass card-hover p-6 rounded-2xl"
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
@@ -59,7 +62,7 @@ export default function TechStack() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
-            className="mt-8 glass p-6 rounded-xl max-w-4xl mx-auto"
+            className="mt-6 glass p-6 sm:p-8 rounded-2xl max-w-4xl mx-auto"
           >
             <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Why These Technologies?

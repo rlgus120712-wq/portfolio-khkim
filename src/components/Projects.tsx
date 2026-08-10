@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { projects } from '@/data/projects';
 import { ExternalLink, Calendar, Briefcase, Building2, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import SectionHeader from './SectionHeader';
 
 const Projects = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -33,23 +34,20 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 sm:py-20 px-3 sm:px-6" ref={ref}>
+    <section
+      id="projects"
+      className="py-24 sm:py-28 px-4 sm:px-6 scroll-mt-20"
+      ref={ref}
+    >
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }} // 애니메이션 속도 개선
-          className="text-center mb-8 sm:mb-12"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 gradient-text">
-            Projects
-          </h2>
-          <p className="text-gray-400 text-base sm:text-lg">
-            주요 프로젝트 및 성과물
-          </p>
-        </motion.div>
+        <SectionHeader
+          eyebrow="Work"
+          title="Projects"
+          subtitle="주요 프로젝트 및 성과물"
+          inView={inView}
+        />
 
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-4">
           {projects.map((project, index) => {
             const isExpanded = expandedItem === index;
             
@@ -59,7 +57,7 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.05 }} // 지연 시간 단축
-                className="glass rounded-xl overflow-hidden shadow-lg"
+                className="glass card-hover rounded-2xl overflow-hidden"
               >
                 {/* 아코디언 헤더 - 클릭 가능한 영역 */}
                 <div 

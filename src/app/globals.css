@@ -2,92 +2,140 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   Base — 토큰과 전역 기본값만. 레이아웃/크기는 컴포넌트가 관리.
+   (Tailwind 유틸리티를 덮어쓰지 않도록 @layer base 안에 둔다)
+   ============================================================ */
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-gray-950 text-white transition-colors duration-300;
+    @apply bg-gray-950 text-gray-100 antialiased;
+    font-family: 'Pretendard Variable', var(--font-inter), ui-sans-serif,
+      system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic',
+      sans-serif;
+  }
+
+  html.light {
+    color-scheme: light;
   }
 
   html.light body {
     @apply bg-white text-gray-900;
   }
 
-  * {
-    @apply border-gray-800;
+  /* 헤딩은 디스플레이 폰트 + 타이트한 자간 (에디토리얼 톤) */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display), 'Pretendard Variable', var(--font-inter),
+      sans-serif;
+    letter-spacing: -0.02em;
   }
 
-  html.light * {
-    @apply border-gray-200;
+  ::selection {
+    @apply bg-blue-500/30 text-white;
+  }
+
+  html.light ::selection {
+    @apply bg-blue-200 text-blue-900;
   }
 }
 
-@layer utilities {
-  .grid-background {
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  html.light .grid-background {
-    background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-  }
-
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary-500 via-blue-500 to-purple-500 bg-clip-text text-transparent;
-  }
-
-  html.light .gradient-text {
-    @apply from-blue-700 via-purple-700 to-pink-700;
-  }
-
+/* ============================================================
+   Components — 재사용 토큰. 여백/모서리/크기는 유틸리티로 오버라이드 가능.
+   (utilities 레이어가 뒤에 오므로 컴포넌트에서 p-*, rounded-* 로 제어)
+   ============================================================ */
+@layer components {
   .glass {
-    @apply bg-white/5 backdrop-blur-sm;
+    @apply bg-white/[0.04] backdrop-blur-md border border-white/10;
   }
 
   html.light .glass {
-    @apply bg-blue-50 shadow-md border border-blue-200;
+    @apply bg-white border-blue-100 shadow-sm;
   }
 
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-400 via-blue-400 to-purple-400
+      bg-clip-text text-transparent;
+  }
+
+  html.light .gradient-text {
+    @apply from-blue-600 via-purple-600 to-pink-600;
+  }
+
+  /* 카드 호버 — 살짝 뜨고 테두리가 밝아지는 미세 인터랙션 */
   .card-hover {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/20;
+    @apply transition-all duration-300 hover:-translate-y-1
+      hover:border-white/20 hover:bg-white/[0.06];
   }
 
   html.light .card-hover {
-    @apply hover:shadow-xl hover:shadow-blue-300/50;
+    @apply hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100;
+  }
+
+  /* 섹션 상단 라벨 (모든 섹션 공통 톤) */
+  .section-eyebrow {
+    @apply inline-block text-xs font-semibold uppercase tracking-[0.22em]
+      text-blue-400 mb-3;
+    font-family: var(--font-display), 'Pretendard Variable', sans-serif;
+  }
+
+  html.light .section-eyebrow {
+    @apply text-blue-600;
+  }
+}
+
+/* ============================================================
+   Utilities — 순수 유틸리티
+   ============================================================ */
+@layer utilities {
+  .grid-background {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.045) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  html.light .grid-background {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.035) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
   }
 
   .section-bg-even {
-    @apply bg-black/30;
+    @apply bg-white/[0.015];
   }
 
   html.light .section-bg-even {
-    @apply bg-blue-50;
-  }
-
-  /* 원형 배경을 위한 bg-white/10 커스터마이징 */
-  .bg-white\/10 {
-    background-color: hsla(0, 0%, 100%, .1);
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  html.light .bg-white\/10 {
-    background-color: hsla(0, 0%, 0%, .05);
+    @apply bg-blue-50/60;
   }
 }
 
-/* Custom scrollbar */
+/* ============================================================
+   커스텀 스크롤바
+   ============================================================ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-900;
+  @apply bg-gray-950;
 }
 
 html.light ::-webkit-scrollbar-track {
@@ -95,11 +143,11 @@ html.light ::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-700 rounded-full;
+  @apply bg-gray-700 rounded-full border-2 border-solid border-gray-950;
 }
 
 html.light ::-webkit-scrollbar-thumb {
-  @apply bg-blue-400 rounded-full;
+  @apply bg-blue-300 border-gray-100;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -107,426 +155,12 @@ html.light ::-webkit-scrollbar-thumb {
 }
 
 html.light ::-webkit-scrollbar-thumb:hover {
-  @apply bg-blue-500;
+  @apply bg-blue-400;
 }
 
-/* ============================================
-   모바일 메뉴 애니메이션
-   ============================================ */
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ============================================
-   반응형 디자인 시스템 - 통합 버전
-   ============================================ */
-
-/* 섹션 패딩 */
-section {
-  padding: 1.5rem 0.75rem;
-}
-
-/* 제목 스타일 */
-.gradient-text {
-  font-size: 2.5rem;
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-}
-
-/* 카드 스타일 */
-.glass {
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-html.light .glass {
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-/* 타이포그래피 계층 */
-h1 {
-  font-size: 2rem;
-  line-height: 1.2;
-  font-weight: 800;
-}
-
-h2 {
-  font-size: 1.75rem;
-  line-height: 1.3;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 1.25rem;
-  line-height: 1.3;
-  font-weight: 700;
-}
-
-h4 {
-  font-size: 1.125rem;
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-p {
-  font-size: 1rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-/* 간격 최적화 */
-.space-y-8 > * + * {
-  margin-top: 1.25rem;
-}
-
-.space-y-6 > * + * {
-  margin-top: 1rem;
-}
-
-.space-y-4 > * + * {
-  margin-top: 0.75rem;
-}
-
-.space-y-3 > * + * {
-  margin-top: 0.5rem;
-}
-
-.space-y-2 > * + * {
-  margin-top: 0.375rem;
-}
-
-.space-y-1 > * + * {
-  margin-top: 0.25rem;
-}
-
-/* 아이콘 크기 최적화 */
-.w-8.h-8 {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.w-6.h-6 {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.w-5.h-5 {
-  width: 1rem;
-  height: 1rem;
-}
-
-.w-4.h-4 {
-  width: 0.875rem;
-  height: 0.875rem;
-}
-
-.w-3.h-3 {
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
-/* 텍스트 크기 최적화 */
-.text-xs {
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.text-sm {
-  font-size: 1rem;
-  line-height: 1.4;
-}
-
-.text-base {
-  font-size: 1.125rem;
-  line-height: 1.5;
-}
-
-.text-lg {
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-/* 버튼 및 링크 최적화 */
-button, .btn {
-  min-height: 44px;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-a {
-  min-height: 40px;
-  display: flex;
-  align-items: center;
-}
-
-/* 기술 태그 최적화 */
-.tech-tag {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  margin: 0.125rem;
-}
-
-/* 프로젝트 카드 최적화 */
-.project-card {
-  margin-bottom: 1.25rem;
-  padding: 1rem;
-}
-
-/* 성과 리스트 최적화 */
-.achievement-list {
-  margin-bottom: 1rem;
-}
-
-.achievement-item {
-  margin-bottom: 0.375rem;
-}
-
-/* 메타데이터 최적화 */
-.metadata {
-  margin-bottom: 0.75rem;
-}
-
-.metadata-item {
-  margin-right: 1rem;
-}
-
-/* 데스크톱 스타일 (768px 이상) */
-@media (min-width: 768px) {
-  .gradient-text {
-    font-size: 3rem;
-    line-height: 1.1;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-  }
-
-  section {
-    padding: 3rem 1.5rem;
-  }
-
-  .glass {
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    font-weight: 900;
-  }
-
-  h2 {
-    font-size: 2rem;
-    line-height: 1.2;
-    font-weight: 800;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    font-weight: 700;
-  }
-
-  h4 {
-    font-size: 1.25rem;
-    line-height: 1.4;
-    font-weight: 600;
-  }
-
-  p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    font-weight: 400;
-  }
-}
-
-/* ============================================
-   다크모드 텍스트 가독성 개선
-   ============================================ */
-
-/* 다크모드 기본 텍스트 색상 개선 */
-body {
-  color: #f8fafc;
-}
-
-/* 다크모드 회색 텍스트 색상 개선 */
-.text-gray-300 {
-  color: #e2e8f0;
-  font-weight: 400;
-}
-
-.text-gray-400 {
-  color: #cbd5e1;
-  font-weight: 400;
-}
-
-.text-gray-500 {
-  color: #94a3b8;
-  font-weight: 400;
-}
-
-/* 다크모드 주요 색상 개선 */
-.text-primary-400 {
-  color: #60a5fa;
-  font-weight: 500;
-}
-
-.text-green-400 {
-  color: #34d399;
-  font-weight: 600;
-}
-
-.text-white {
-  color: #ffffff;
-  font-weight: 500;
-}
-
-/* 다크모드 제목 색상 개선 */
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-/* 다크모드 본문 텍스트 개선 */
-p, span, li {
-  color: #e2e8f0;
-  font-weight: 400;
-}
-
-/* ============================================
-   성과 영역 녹색 스타일링
-   ============================================ */
-
-.text-green-400 {
-  color: #34d399;
-  font-weight: 600;
-}
-
-/* ============================================
-   Light Mode 최적화 - 더 어울리는 색상
-   ============================================ */
-
-html.light section {
-  background-color: #ffffff;
-}
-
-html.light nav {
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid #e5e7eb;
-}
-
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light h5,
-html.light h6 {
-  color: #1e293b;
-  font-weight: 700;
-}
-
-html.light p,
-html.light span:not(.gradient-text):not(.text-green-400),
-html.light li {
-  color: #475569;
-  font-weight: 500;
-}
-
-html.light .text-gray-300,
-html.light .text-gray-400 {
-  color: #64748b;
-  font-weight: 500;
-}
-
-html.light .text-white {
-  color: #1e293b;
-  font-weight: 600;
-}
-
-html.light .text-green-400 {
-  color: #059669;
-  font-weight: 700;
-}
-
-html.light .text-primary-400 {
-  color: #2563eb;
-  font-weight: 600;
-}
-
-/* 라이트 모드에서 회색 요소들을 파란색 계열로 변경 */
-html.light .glass {
-  background-color: #eff6ff;
-  border-color: #dbeafe;
-}
-
-html.light .section-bg-even {
-  background-color: #f8fafc;
-}
-
-html.light .card-hover:hover {
-  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
-}
-
-/* ============================================
-   타이포그래피 - 모던 가변 폰트 적용
-   ============================================ */
-
-body {
-  font-family: 'Pretendard Variable', var(--font-inter), ui-sans-serif,
-    system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-}
-
-/* 헤딩·그라디언트 타이틀은 디스플레이 폰트 + 타이트한 자간(에디토리얼 느낌) */
-h1,
-h2,
-h3,
-h4,
-.gradient-text {
-  font-family: var(--font-display), 'Pretendard Variable', var(--font-inter),
-    sans-serif;
-  letter-spacing: -0.02em;
-}
-
-/* ============================================
-   접근성 - 모션 최소화 선호 대응
-   (heavy 애니메이션/GPU 강제 레이어 무력화)
-   ============================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  * {
-    transform: none !important;
-  }
-}
-
-/* ============================================
-   Hero 대형 에디토리얼 타이포
-   (기존 .gradient-text 고정 크기보다 뒤에 정의 → 우선 적용)
-   ============================================ */
-
+/* ============================================================
+   Hero 대형 에디토리얼 타이포 (의도적 고정 스케일)
+   ============================================================ */
 .hero-eyebrow {
   font-family: var(--font-display), 'Pretendard Variable', var(--font-inter),
     sans-serif;
@@ -543,4 +177,18 @@ h4,
   line-height: 1.02;
   font-weight: 700;
   letter-spacing: -0.035em;
+}
+
+/* ============================================================
+   접근성 — 모션 최소화 선호 대응
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
