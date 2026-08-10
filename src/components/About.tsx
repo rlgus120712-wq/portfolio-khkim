@@ -6,109 +6,139 @@ import { Code2, Rocket, Users, Sparkles, Factory, Shield } from 'lucide-react';
 
 const About = () => {
   const { ref, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
     triggerOnce: true,
   });
 
-  const features = [
+  // 벤토 셀: 크기(span)를 제각각으로 두고 스탯/피처를 섞는다
+  const cells = [
     {
-      icon: <Code2 className="w-8 h-8 sm:w-10 sm:h-10" />,
-      title: '클린 코드',
-      description: 'TypeScript와 Feature-Sliced Design으로 유지보수성 99% 향상',
+      type: 'feature',
+      icon: <Code2 className="w-9 h-9" />,
+      title: '클린 코드 & 아키텍처',
+      desc: 'TypeScript와 Feature-Sliced Design으로 확장·유지보수에 강한 구조를 설계합니다.',
+      span: 'lg:col-span-2 lg:row-span-2',
+      accent:
+        'bg-gradient-to-br from-blue-500/20 via-blue-500/5 to-purple-500/15 !border-blue-400/30',
     },
     {
-      icon: <Rocket className="w-8 h-8 sm:w-10 sm:h-10" />,
-      title: '성능 최적화',
-      description: 'Vite + TanStack Query로 초기 로딩 속도 40% 개선',
+      type: 'stat',
+      value: '99%',
+      label: '유지보수성 향상',
+      span: '',
     },
     {
-      icon: <Users className="w-8 h-8 sm:w-10 sm:h-10" />,
+      type: 'stat',
+      value: '40%',
+      label: '초기 로딩 속도 개선',
+      sub: 'Vite · TanStack Query',
+      span: '',
+    },
+    {
+      type: 'feature',
+      icon: <Users className="w-7 h-7" />,
       title: '협업',
-      description: 'Jira + Confluence + GitHub으로 10인+ 팀 효율 증대',
+      desc: 'Jira · Confluence · GitHub 기반 10인+ 팀 협업',
+      span: 'lg:col-span-2',
     },
     {
-      icon: <Sparkles className="w-8 h-8 sm:w-10 sm:h-10" />,
+      type: 'feature',
+      icon: <Sparkles className="w-7 h-7" />,
       title: '지속적 학습',
-      description: '매일 기술 블로그 작성 및 최신 트렌드 습득',
+      desc: '매일 기술 블로그를 쓰며 최신 트렌드를 흡수합니다.',
+      span: 'lg:row-span-2',
+      accent:
+        'bg-gradient-to-b from-purple-500/15 to-transparent !border-purple-400/25',
     },
     {
-      icon: <Factory className="w-8 h-8 sm:w-10 sm:h-10" />,
-      title: '스마트팩토리',
-      description: '8개 공장 MES 구축, 생산성 평균 30% 향상 기여',
+      type: 'stat',
+      value: '8개',
+      label: '스마트팩토리 공장 구축',
+      icon: <Factory className="w-6 h-6" />,
+      span: '',
     },
     {
-      icon: <Shield className="w-8 h-8 sm:w-10 sm:h-10" />,
+      type: 'stat',
+      value: '30%',
+      label: '생산성 향상 기여',
+      span: '',
+    },
+    {
+      type: 'feature',
+      icon: <Shield className="w-7 h-7" />,
       title: 'HACCP 인증',
-      description: '식품안전관리 시스템으로 국가 인증마크 획득',
+      desc: '식품안전관리 시스템으로 국가 인증마크 획득',
+      span: 'lg:col-span-2',
+    },
+    {
+      type: 'stat',
+      value: '⚡',
+      label: '성능 최적화 우선주의',
+      span: '',
     },
   ];
 
   return (
     <section id="about" className="py-16 sm:py-20 px-4 sm:px-6 pt-20" ref={ref}>
       <div className="max-w-7xl mx-auto">
-        {/* About Me 섹션 */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text">
             About Me
           </h2>
-          <p className="text-gray-400 text-lg">
-            매일의 기록 = 성장의 증거
-          </p>
+          <p className="text-gray-400 text-lg">매일의 기록 = 성장의 증거</p>
         </motion.div>
 
-        {/* Bento Grid - 셀 크기를 다양화한 비대칭 레이아웃 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
-          {features.map((feature, index) => {
-            // 벤토 배치: 0·1은 넓게(3칸), 2·3·4는 중간(2칸), 5는 풀폭(6칸)
-            const span = [
-              'lg:col-span-3',
-              'lg:col-span-3',
-              'lg:col-span-2',
-              'lg:col-span-2',
-              'lg:col-span-2',
-              'lg:col-span-6',
-            ][index] ?? 'lg:col-span-2';
-            const featured = index === 0;
-            const fullWidth = index === 5;
-            return (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
-                className={`glass rounded-2xl p-6 sm:p-7 transition-all duration-300 group hover:-translate-y-1 ${span} ${
-                  featured
-                    ? 'bg-gradient-to-br from-blue-500/15 via-blue-500/5 to-purple-500/10 !border-blue-400/30'
-                    : ''
-                } ${fullWidth ? 'flex flex-col sm:flex-row sm:items-center sm:gap-6' : ''}`}
-              >
-                <div
-                  className={`text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300 ${
-                    fullWidth ? 'sm:mb-0 shrink-0' : ''
-                  } ${featured ? 'scale-110 origin-left' : ''}`}
-                >
-                  {feature.icon}
-                </div>
-                <div>
-                  <h3
-                    className={`font-bold mb-2 sm:mb-3 text-white dark:text-white ${
-                      featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
-                    }`}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-200 dark:text-gray-200 text-sm sm:text-base leading-relaxed font-medium">
-                    {feature.description}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:auto-rows-[172px] grid-flow-dense">
+          {cells.map((cell, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className={`glass !mb-0 rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 ${cell.span} ${
+                cell.accent ?? ''
+              }`}
+            >
+              {cell.type === 'stat' ? (
+                <>
+                  <div className="text-blue-400/90">
+                    {cell.icon ?? null}
+                  </div>
+                  <div>
+                    <div className="gradient-text font-extrabold leading-none text-4xl sm:text-5xl mb-2">
+                      {cell.value}
+                    </div>
+                    <p className="text-gray-200 text-sm font-medium leading-snug">
+                      {cell.label}
+                    </p>
+                    {cell.sub && (
+                      <p className="text-gray-400 text-xs mt-1">{cell.sub}</p>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-blue-400 group-hover:scale-110 transition-transform duration-300 origin-left">
+                    {cell.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2 text-white text-lg sm:text-xl">
+                      {cell.title}
+                    </h3>
+                    <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-medium">
+                      {cell.desc}
+                    </p>
+                  </div>
+                </>
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
