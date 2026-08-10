@@ -97,7 +97,7 @@ export default function TechStack() {
 
             <div className="mt-6 pt-4 border-t border-gray-800">
               <a
-                href="https://github.com/rlgus120712-wq/portfolio-khjo"
+                href="https://github.com/rlgus120712-wq/portfolio-khkim"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-blue-500/50 transition-all"

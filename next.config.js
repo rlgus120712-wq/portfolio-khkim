@@ -20,8 +20,8 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   distDir: 'out', // GitHub Actions와 일치하도록 수정
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/portfolio-khjo' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/portfolio-khjo' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/portfolio-khkim' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/portfolio-khkim' : '',
 }
 
 module.exports = nextConfig
