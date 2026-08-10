@@ -1,4 +1,4 @@
-# Portfolio KHJO
+# Portfolio KH-KIM
 
 김기현의 포트폴리오 웹사이트
 
