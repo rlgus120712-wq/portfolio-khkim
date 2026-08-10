@@ -489,3 +489,42 @@ html.light .section-bg-even {
 html.light .card-hover:hover {
   box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
 }
+
+/* ============================================
+   타이포그래피 - 모던 가변 폰트 적용
+   ============================================ */
+
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+/* 헤딩·그라디언트 타이틀은 디스플레이 폰트 + 타이트한 자간(에디토리얼 느낌) */
+h1,
+h2,
+h3,
+h4,
+.gradient-text {
+  font-family: var(--font-display), var(--font-inter), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================
+   접근성 - 모션 최소화 선호 대응
+   (heavy 애니메이션/GPU 강제 레이어 무력화)
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  * {
+    transform: none !important;
+  }
+}

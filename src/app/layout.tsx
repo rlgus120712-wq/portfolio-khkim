@@ -1,7 +1,24 @@
 import type { Metadata, Viewport } from 'next'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
+// 본문용 가변 폰트
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+// 헤딩(디스플레이)용 폰트 - 모던 지오메트릭
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['500', '600', '700'],
+})
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rlgus120712-wq.github.io/portfolio-khkim'),
   title: '김기현 | Frontend Developer Portfolio',
   description: 'Vue 3, React, TypeScript 전문 프론트엔드 개발자 김기현의 포트폴리오',
   keywords: ['Frontend Developer', 'React', 'Vue', 'TypeScript', 'Next.js', '김기현'],
@@ -11,14 +28,16 @@ export const metadata: Metadata = {
     description: 'Vue 3, React, TypeScript 전문 프론트엔드 개발자',
     type: 'website',
     locale: 'ko_KR',
+    url: 'https://rlgus120712-wq.github.io/portfolio-khkim',
   },
 }
 
+// 접근성: 사용자 확대(zoom)를 막지 않도록 허용
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
 }
 
 export default function RootLayout({
@@ -27,11 +46,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko" className="scroll-smooth">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-      </head>
-      <body className="antialiased">{children}</body>
+    <html
+      lang="ko"
+      className={`scroll-smooth ${inter.variable} ${spaceGrotesk.variable}`}
+    >
+      <body className="antialiased font-sans">{children}</body>
     </html>
   )
 }
