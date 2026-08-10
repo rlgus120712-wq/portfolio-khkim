@@ -61,25 +61,32 @@ const About = () => {
           </p>
         </motion.div>
 
-        {/* 스킬 카드들 - glass 클래스 사용하여 다크/라이트 모드 자동 전환 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass rounded-2xl p-6 transition-all duration-300 group"
-            >
-              <div className="text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300">
-                {feature.icon}
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-3 text-white dark:text-white">
-                {feature.title}
-              </h3>
-              <p className="text-gray-200 dark:text-gray-200 text-sm sm:text-base leading-relaxed font-medium">{feature.description}</p>
-            </motion.div>
-          ))}
+        {/* Bento Grid - 비대칭 레이아웃(양 끝 카드는 2칸 차지) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-fr">
+          {features.map((feature, index) => {
+            const wide = index === 0 || index === features.length - 1;
+            return (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
+                className={`glass rounded-2xl p-6 transition-all duration-300 group hover:-translate-y-1 ${
+                  wide ? 'lg:col-span-2' : ''
+                }`}
+              >
+                <div className="text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold mb-3 text-white dark:text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-200 dark:text-gray-200 text-sm sm:text-base leading-relaxed font-medium">
+                  {feature.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

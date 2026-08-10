@@ -129,14 +129,6 @@ html.light ::-webkit-scrollbar-thumb:hover {
    반응형 디자인 시스템 - 통합 버전
    ============================================ */
 
-/* 기본 스타일 (모든 화면 크기) */
-* {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
 /* 섹션 패딩 */
 section {
   padding: 1.5rem 0.75rem;
@@ -527,4 +519,25 @@ h4,
   * {
     transform: none !important;
   }
+}
+
+/* ============================================
+   Hero 대형 에디토리얼 타이포
+   (기존 .gradient-text 고정 크기보다 뒤에 정의 → 우선 적용)
+   ============================================ */
+
+.hero-eyebrow {
+  font-family: var(--font-display), var(--font-inter), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--font-display), var(--font-inter), sans-serif;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
