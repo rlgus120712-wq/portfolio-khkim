@@ -105,6 +105,52 @@ export const projects: Project[] = [
     period: "2025",
     link: "https://github.com/rlgus120712-wq/killer_joki_-development_story",
   },
+  {
+    title: "프론트엔드 커밋 파이프라인 성능 최적화 (Husky → Lefthook 전환)",
+    description: "Nx 모노레포의 Git 훅 도구를 Lefthook으로 전환하고 type-checked ESLint 병목을 실측 기반으로 개선한 개발 생산성(DX) 프로젝트",
+    tech: [
+      "Lefthook",
+      "ESLint",
+      "typescript-eslint",
+      "pnpm",
+      "NX Monorepo",
+      "Vue 3",
+      "TypeScript",
+      "Bash"
+    ],
+    role: "Frontend Developer (DX / Tooling)",
+    company: "Okestro",
+    highlights: [
+      "Husky + lint-staged 조합을 Lefthook 단일 바이너리(YAML 설정 1개)로 대체하여 의존성·설정 복잡도 축소",
+      "직렬/병렬/batch 실행을 실측 비교하는 벤치마크 도구를 직접 제작하여 병목이 'type-checked ESLint의 TypeScript 프로그램 재빌드 고정비용'임을 규명",
+      "병렬 실행의 OOM 위험을 사전 검증하는 메모리 프로파일링 스크립트 구현 (피크 RSS 샘플링 + 안전 조합 탐색)",
+      "pnpm v10 빌드 스크립트 차단으로 인한 훅 설치 실패를 onlyBuiltDependencies 허용 설정으로 해결",
+      "📊 성과: pre-commit 검증 시간 47초 → 20초로 2.3배 단축 (파일별 실행 → batch 전환)"
+    ],
+    period: "2026",
+  },
+  {
+    title: "Okestro CMP - 서비스 카탈로그 리팩터링 (FSD)",
+    description: "클라우드 관리 플랫폼 서비스 카탈로그 도메인(약 2만 라인)을 레이어별 병렬 코드 리뷰로 진단하고 죽은 코드·잠재 버그·타입 취약점을 체계적으로 개선",
+    tech: [
+      "Vue 3",
+      "TypeScript",
+      "TanStack Query",
+      "Ant Design Vue",
+      "Pinia",
+      "Feature-Sliced Design"
+    ],
+    role: "Frontend Developer",
+    company: "Okestro",
+    highlights: [
+      "데이터/훅/UI/구조 레이어별 병렬 코드 리뷰로 대규모 도메인을 체계적으로 진단",
+      "하드코딩된 workspaceId 3개소를 Pinia Store 주입으로 대체하여 멀티 워크스페이스 북마크 버그 수정",
+      "API 레이어 any 타입 제거 및 TanStack Query 캐시 무효화 정합성 검증으로 타입 안전성 강화",
+      "퍼블리싱 정책 준수: 커스텀 CSS 헬퍼를 디자인 시스템 컴포넌트(a-flex) API로 통일",
+      "📊 성과: 미사용(dead) 컴포넌트·디렉토리 8개 제거로 네이밍 충돌 및 유지보수 부담 감소"
+    ],
+    period: "2026",
+  },
 
   // ========== 크로니즈시스템 프로젝트 ==========
   {
