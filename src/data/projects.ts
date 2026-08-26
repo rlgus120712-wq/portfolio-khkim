@@ -63,6 +63,36 @@ export const projects: Project[] = [
     period: "2024 - Present",
   },
   {
+    title: "Okestro CMP - Governance Platform (거버넌스)",
+    description:
+      "멀티 테넌트 클라우드 거버넌스 플랫폼 - 조직/역할/권한부터 서비스 카탈로그·템플릿, 승인 워크플로우, 알림, 감사·접근 로그까지 전 영역 프론트엔드를 2년간 설계·구축·고도화",
+    tech: [
+      "Vue 3",
+      "TypeScript",
+      "Pinia",
+      "TanStack Query",
+      "Feature-Sliced Design",
+      "NX Monorepo",
+      "Ant Design Vue",
+      "Keycloak",
+      "RBAC"
+    ],
+    role: "Frontend Developer (Governance 도메인 담당)",
+    company: "Okestro",
+    highlights: [
+      "조직(Organization) 관리: 다계층 조직도, 멤버·워크스페이스 매핑, 멀티 테넌트 격리",
+      "역할·권한(Role & Access Control): RBAC 역할 정의, 접근 허용/라우트/사용자별 세밀한 권한 제어",
+      "서비스 카탈로그·스토어: 클라우드 리소스 카탈로그와 신청(Service Request) 여정 설계",
+      "서비스 템플릿: 폼/YAML 기반 서비스 템플릿 빌더 및 재사용 템플릿 관리",
+      "승인 워크플로우(Approvals): 다단계 결재·위임(Delegate) 및 서비스 데스크 연동",
+      "알림(Notification): 이벤트 기반 알림 센터 및 알림/토스트 정책 체계화",
+      "감사·접근 로그(Audit/Access Log): 사용자 행위 추적, 접속 이력, 감사 로그 뷰어 구축",
+      "메뉴·페이지 관리, 메트릭·쿼터 관리, 세션 관리 등 플랫폼 운영 기능 개발",
+      "📊 성과: 2년간 거버넌스 도메인 20+ 모듈 지속 설계·고도화 및 운영"
+    ],
+    period: "2023 - Present",
+  },
+  {
     title: "Design System & Component Library",
     description: "재사용 가능한 Vue 3 컴포넌트 라이브러리",
     tech: ["Vue 3", "TypeScript", "Vuetify", "Storybook", "SCSS", "Design Tokens"],
