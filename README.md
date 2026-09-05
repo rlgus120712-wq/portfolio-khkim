@@ -37,7 +37,7 @@ npm run build
 
 This project is automatically deployed to GitHub Pages.
 
-Visit: https://rlgus120712-wq.github.io/portfolio-khjo/
+Visit: https://rlgus120712-wq.github.io/portfolio-khkim/
 
 ## Recent Updates
 
